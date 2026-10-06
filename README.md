@@ -5,6 +5,12 @@ A comprehensive, end-to-end Business Intelligence solution engineered for **Cott
 
 ---
 
+## 🔗 Live Discussion & LinkedIn Post
+Check out the interactive project overview, business presentation, and community feedback on **LinkedIn**:
+👉 [View Cottonil Retail Analytics Post on LinkedIn](https://lnkd.in/p/e84ppnX4)
+
+---
+
 ## 🗺️ Detailed Dashboard Pages & Analytical Breakdown
 
 ### 1. Cover Page
@@ -21,7 +27,7 @@ A comprehensive, end-to-end Business Intelligence solution engineered for **Cott
 > **Analytical & Visual Breakdown:**
 > - **Seasonal Performance:** Evaluates quarterly seasonality where Q2 (Spring/Summer) leads revenue at **1.28M**, followed by Q1 (Winter/Spring) at **831.52K**.
 > - **Category Share:** Highlights product revenue distribution—Men's category dominating **67.98% (2.22M)**, followed by Women's **17.94% (586.77K)**, Kids **9.77%**, and General **4.31%**.
-> - **Product Performance & Daily Trends:** Uses combo charts comparing Gross vs. Net Sales against quantity sold, complemented by dynamic line graphs showing daily sales peaks (e.g., Thursday/Wednesday surges).
+> - **Product Performance & Daily Trends:** Uses combo charts comparing Gross vs. Net Sales against quantity sold, complemented by dynamic line graphs showing daily sales peaks.
 ![Overview Page](./Screenshots/OverView%20page.png)
 
 ---
@@ -35,7 +41,7 @@ A comprehensive, end-to-end Business Intelligence solution engineered for **Cott
 
 #### 🟢 Market Basket Analysis (Cross-Selling & Basket Insights)
 > **Core Focus & DAX Implementation:**
-> Utilizes advanced DAX cross-filtering algorithms to analyze co-purchasing behavior ("Frequently Bought Together"). It identifies which products (e.g., specific underwear lines, socks, or seasonal wear) are most frequently bundled in the same invoice, enabling better cross-selling and promotional bundling.
+> Utilizes advanced DAX cross-filtering algorithms to analyze co-purchasing behavior ("Frequently Bought Together"). It identifies which products are most frequently bundled in the same invoice, enabling better cross-selling and promotional bundling.
 ![Market Basket Analysis](./Screenshots/Market%20Basket%20Analysis.png)
 
 #### 🟢 Top Invoice Sales
@@ -118,7 +124,15 @@ A comprehensive, end-to-end Business Intelligence solution engineered for **Cott
 > Built on an optimized **Star Schema** data model connecting central Fact tables (*Sales, Purchases, Inventory*) with normalized Dimension tables (*Date, Products, Categories, Suppliers, Stores*). This architecture ensures fast DAX query performance and seamless interactivity across all visual pages.
 ![Data Modeling](./Screenshots/DataModeling.png)
 
-### 💡 Advanced Technical Highlights:
+### 💡 Advanced Technical Highlights & DAX
 1. **Dynamic Time Intelligence:** Custom DAX measures for YoY growth, YTD performance, and dynamic period-over-period comparisons.
 2. **Basket Analysis Logic:** DAX calculations operating over disconnected tables to determine co-occurrence matrix values without performance lag.
 3. **What-If Simulations:** Dynamic parameters driving real-time margin estimations.
+
+```dax
+// Example DAX Metric: YoY Sales Growth %
+Sales YoY Growth % = 
+VAR CurrentSales = [Total Sales]
+VAR PreviousSales = CALCULATE([Total Sales], SAMEPERIODLASTYEAR('Calendar'[Date]))
+RETURN
+DIVIDE(CurrentSales - PreviousSales, PreviousSales, 0)
